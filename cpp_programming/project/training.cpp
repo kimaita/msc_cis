@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <random>
 #include <sstream>
 #include <string>
@@ -243,18 +244,8 @@ public:
 // Function to load text from file
 string load_text_file(string filename)
 {
-    string content;
-    ifstream file(filename);
-    if (file.is_open())
-    {
-        while (getline(file, content))
-        {
-            cout << content << '\n';
-        }
-        file.close();
-    }
-    else
-        cout << "Error: Could not open file " << filename << "\n";
+    ifstream in(filename);
+    string content((istreambuf_iterator<char>(in)), istreambuf_iterator<char>());
     return content;
 }
 
